@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gasolinera Cercana — Encuentra gasolina barata cerca de ti</title>
+<meta name="description" content="Gasolinera Cercana: Encuentra gasolina barata cerca de ti. Free fuel cost calculators, fuel grade reference tables, and driver guides.">
+<meta name="theme-color" content="#7c2d12">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--dark:#7c2d12;--dark2:#9a3412;--dark3:#b45309;--accent:#16a34a;--accent-dark:#15803d;--bg:#f7f3ef;--card:#fff;--text:#241612;--muted:#6b5a52;--border:#e3d8d0;--result-bg:#f0fdf4;--row-alt:#faf6f2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+a{color:var(--accent-dark)}
+header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--accent);color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--accent)}
+.brand small{display:block;font-size:11.5px;color:#cbd5c1;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#dbe7db;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--dark2);color:#fff}
+.hero{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 60%,var(--dark3) 100%);color:#fff;padding:44px 0 40px}
+.hero h1{font-size:clamp(26px,5vw,40px);line-height:1.2;max-width:760px}
+.hero h1 span{color:var(--accent)}
+.hero p{color:#d7e3d7;font-size:16px;max-width:720px;margin-top:12px}
+.hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .badge{background:rgba(255,255,255,.08);border:1px solid var(--accent);color:#ffe9c9;font-size:13px;font-weight:600;border-radius:999px;padding:6px 13px}
+section{padding:34px 0 8px}
+section h2{font-size:24px;margin-bottom:6px}
+.section-sub{color:var(--muted);font-size:15px;max-width:760px;margin-bottom:20px}
+.calc-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:860px){.calc-grid{grid-template-columns:1fr 1fr}.calc-grid .wide{grid-column:1 / -1}}
+.card{background:var(--card);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.06);padding:22px 20px;border-top:4px solid var(--accent)}
+.card h3{font-size:18px;margin-bottom:2px}
+.card .tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark)}
+.card .desc{font-size:14px;color:var(--muted);margin:6px 0 16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.field label small{font-weight:400;color:var(--muted)}
+.field input,.field select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none;background:#fff;color:var(--text)}
+.field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:hover{filter:brightness(1.08)}
+.result{margin-top:16px;background:var(--result-bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:none}
+.result.show{display:block}
+.result .big{font-size:26px;font-weight:800;color:var(--dark)}
+.result p{font-size:14.5px;margin-top:4px}
+.result .note{font-size:13px;color:var(--muted);margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0}
+th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--dark);color:#fff}
+tr:nth-child(even) td{background:var(--row-alt)}
+.guide-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:760px){.guide-grid{grid-template-columns:1fr 1fr 1fr}}
+.guide-card{background:var(--card);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.06);padding:20px;display:flex;flex-direction:column}
+.guide-card h3{font-size:17px;margin-bottom:8px}
+.guide-card p{font-size:14px;color:var(--muted);flex:1}
+.guide-card a{margin-top:12px;font-weight:700;text-decoration:none}
+.faq-item{background:var(--card);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:16px 18px;margin-bottom:12px}
+.faq-item h3{font-size:16px;margin-bottom:6px}
+.faq-item p{font-size:14.5px;color:var(--muted)}
+footer{background:var(--dark);color:#cbd5c1;margin-top:44px;padding:34px 0 26px;font-size:14px}
+footer h3{color:#fff;font-size:16px;margin-bottom:8px}
+footer p{margin-bottom:10px;max-width:820px}
+footer a{color:var(--accent)}
+.article{max-width:860px}
+.article h1{font-size:clamp(26px,4vw,34px);line-height:1.25;margin:26px 0 10px}
+.article .lede{font-size:17px;color:var(--muted);margin-bottom:18px}
+.article h2{font-size:22px;margin:26px 0 8px}
+.article h3{font-size:18px;margin:20px 0 6px}
+.article p{margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px}
+.article li{margin-bottom:6px}
+.back{margin:22px 0 0;display:inline-block;font-weight:700;text-decoration:none}
+@media(max-width:640px){.brand small{display:none}.hero{padding:30px 0}}
+
+</style>
+</head>
+<body>
+<header><div class="header-in">
+<a class="brand" href=""><span class="mark">⛽</span><span><b>Gasolinera <span>Cercana</span></b><small>Encuentra gasolina barata cerca de ti</small></span></a>
+<nav class="main-nav"><a href="#calculators">Calculadoras</a><a href="#fuel-table">Combustibles</a><a href="#guides">Guías</a><a href="#faq">Preguntas</a></nav>
+</div></header>
+<section class="hero"><div class="wrap">
+<h1>Encuentra gasolina barata cerca de ti — <span>y calcula cuánto costará tu viaje</span></h1>
+<p>Calculadoras gratuitas de combustible, guías de precios honestas y consejos prácticos para conductores. Sin registro ni descargas: todo funciona en tu navegador.</p>
+<div class="badges"><span class="badge">5 calculadoras gratuitas</span><span class="badge">Tipos de combustible y precios</span><span class="badge">Sin registro</span></div>
+</div></section>
+<main class="wrap">
+<section id="calculators">
+<h2>Calculadoras de combustible</h2>
+<p class="section-sub">Introduce tus datos y obtén una estimación al instante. Todos los cálculos se realizan en tu dispositivo.</p>
+<div class="calc-grid">
+<div class="card"><div class="tag">Calculator 1</div><h3>Calculadora de coste de combustible</h3><p class="desc">¿Cuánto costará un viaje en combustible?</p>
+<div class="field"><label for="c1d">Distancia (km)</label><input type="number" id="c1d" placeholder="p. ej. 200" value="200" step="any" min="0"></div><div class="field"><label for="c1m">Consumo de tu coche (L/100 km)</label><input type="number" id="c1m" placeholder="p. ej. 7,5" value="7.5" step="0.1" min="0"></div><div class="field"><label for="c1p">Precio del combustible (€ por litro)</label><input type="number" id="c1p" placeholder="p. ej. 1,55" value="1.55" step="0.01" min="0"></div>
+<button class="btn" onclick="run1()">Calcular</button>
+<div class="result" id="r1"></div></div>
+<div class="card"><div class="tag">Calculator 2</div><h3>Planificador de viaje</h3><p class="desc">Planifica el combustible y las paradas de un viaje largo.</p>
+<div class="field"><label for="c2d">Distancia total del viaje (km)</label><input type="number" id="c2d" placeholder="p. ej. 1200" value="1200" step="any" min="0"></div><div class="field"><label for="c2m">Consumo de tu coche (L/100 km)</label><input type="number" id="c2m" placeholder="p. ej. 7,5" value="7.5" step="0.1" min="0"></div><div class="field"><label for="c2p">Precio del combustible (€ por litro)</label><input type="number" id="c2p" placeholder="p. ej. 1,55" value="1.55" step="0.01" min="0"></div><div class="field"><label for="c2t">Tamaño del depósito (litros)</label><input type="number" id="c2t" placeholder="p. ej. 50" value="50" step="any" min="0"></div>
+<button class="btn" onclick="run2()">Calcular</button>
+<div class="result" id="r2"></div></div>
+<div class="card"><div class="tag">Calculator 3</div><h3>Calculadora de consumo (L/100 km)</h3><p class="desc">Calcula tu consumo real a partir de un repostaje.</p>
+<div class="field"><label for="c3mi">Kilómetros recorridos desde el último repostaje</label><input type="number" id="c3mi" placeholder="p. ej. 520" value="520" step="any" min="0"></div><div class="field"><label for="c3g">Litros consumidos</label><input type="number" id="c3g" placeholder="p. ej. 39" value="39" step="0.1" min="0"></div><div class="field"><label for="c3p">Precio pagado (€ por litro)</label><input type="number" id="c3p" placeholder="p. ej. 1,55" value="1.55" step="0.01" min="0"></div>
+<button class="btn" onclick="run3()">Calcular</button>
+<div class="result" id="r3"></div></div>
+<div class="card"><div class="tag">Calculator 4</div><h3>Eléctrico vs gasolina</h3><p class="desc">Compara el coste mensual de combustible: eléctrico frente a gasolina.</p>
+<div class="field"><label for="c4mi">Kilómetros recorridos al mes</label><input type="number" id="c4mi" placeholder="p. ej. 1500" value="1500" step="any" min="0"></div><div class="field"><label for="c4m">Consumo del coche de gasolina (L/100 km)</label><input type="number" id="c4m" placeholder="p. ej. 7,5" value="7.5" step="0.1" min="0"></div><div class="field"><label for="c4g">Precio de la gasolina (€ por litro)</label><input type="number" id="c4g" placeholder="p. ej. 1,55" value="1.55" step="0.01" min="0"></div><div class="field"><label for="c4e">Consumo del eléctrico (kWh/100 km)</label><input type="number" id="c4e" placeholder="p. ej. 16" value="16" step="0.1" min="0"></div><div class="field"><label for="c4p">Precio de la electricidad (€ por kWh)</label><input type="number" id="c4p" placeholder="p. ej. 0,20" value="0.20" step="0.01" min="0"></div>
+<button class="btn" onclick="run4()">Calcular</button>
+<div class="result" id="r4"></div></div>
+<div class="card"><div class="tag">Calculator 5</div><h3>Ahorro con gasolina normal vs premium</h3><p class="desc">Descubre lo que te cuesta de verdad la gasolina premium cada año.</p>
+<div class="field"><label for="c5r">Precio de la gasolina 95 (€ por litro)</label><input type="number" id="c5r" placeholder="p. ej. 1,55" value="1.55" step="0.01" min="0"></div><div class="field"><label for="c5p">Precio de la gasolina 98 (€ por litro)</label><input type="number" id="c5p" placeholder="p. ej. 1,70" value="1.70" step="0.01" min="0"></div><div class="field"><label for="c5t">Tamaño del depósito (litros)</label><input type="number" id="c5t" placeholder="p. ej. 50" value="50" step="any" min="0"></div><div class="field"><label for="c5f">Repostajes al mes</label><input type="number" id="c5f" placeholder="p. ej. 4" value="4" step="any" min="0"></div>
+<button class="btn" onclick="run5()">Calcular</button>
+<div class="result" id="r5"></div></div>
+</div></section>
+<section id="fuel-table">
+<h2>Tipos de combustible y precios de referencia</h2>
+<p class="section-sub">Tabla de referencia: los precios son promedios aproximados y cambian a diario. Comprueba el precio en el surtidor antes de repostar.</p>
+<table>
+<tr><th>Combustible</th><th>Octanaje</th><th>Uso habitual</th><th>Precio aproximado*</th></tr>
+<tr><td>Gasolina 95</td><td>95 RON</td><td>La mayoría de turismos</td><td>1,55 €/L</td></tr>
+<tr><td>Gasolina 98</td><td>98 RON</td><td>Motores de altas prestaciones y turbo</td><td>1,70 €/L</td></tr>
+<tr><td>Diésel</td><td>— (cetano ~51)</td><td>Coches diésel, furgonetas y camiones</td><td>1,50 €/L</td></tr>
+<tr><td>GLP (autogás)</td><td>~110 RON</td><td>Vehículos adaptados a GLP</td><td>1,00 €/L</td></tr>
+<tr><td>GNV (gas natural)</td><td>~120 RON</td><td>Vehículos adaptados a gas natural</td><td>1,20 €/kg</td></tr>
+</table>
+<p style="font-size:13px;color:var(--muted)">*Estimaciones de referencia: los precios medios cambian a diario y varían mucho entre países y regiones. En España el precio medio de la gasolina 95 ronda 1,50–1,60 €/L; en Latinoamérica los precios varían mucho según el país y los impuestos locales.</p>
+</section>
+<section id="guides">
+<h2>Guías para conductores</h2>
+<p class="section-sub">Consejos prácticos en español claro sobre combustible, gasolineras y cómo ahorrar en la carretera.</p>
+<div class="guide-grid">
+<div class="guide-card"><h3>Cómo encontrar la gasolina más barata cerca de ti</h3><p>Formas sencillas y comprobadas de pagar menos en cada repostaje.</p><a href="guides/gasolina-barata-cerca-de-ti.html">Leer la guía &rarr;</a></div>
+<div class="guide-card"><h3>Servicios de la gasolinera explicados</h3><p>Carga eléctrica, diésel, lavado, aire y más: para qué sirve cada servicio de una gasolinera.</p><a href="guides/servicios-gasolinera.html">Leer la guía &rarr;</a></div>
+<div class="guide-card"><h3>10 formas de ahorrar gasolina</h3><p>Diez hábitos prácticos que reducen tu factura de combustible, sin trucos ni productos que comprar.</p><a href="guides/ahorrar-gasolina.html">Leer la guía &rarr;</a></div>
+<div class="guide-card"><h3>Diésel vs gasolina: lo que debes saber</h3><p>En qué se diferencian los motores diésel y de gasolina, cuánto cuesta cada combustible y cuál te conviene.</p><a href="guides/diesel-vs-gasolina.html">Leer la guía &rarr;</a></div>
+<div class="guide-card"><h3>Carga eléctrica en gasolineras: qué esperar</h3><p>Cómo funciona la carga rápida, cuánto cuesta y cómo planificar un viaje en coche eléctrico.</p><a href="guides/carga-electrica-gasolineras.html">Leer la guía &rarr;</a></div>
+<div class="guide-card"><h3>Consejos de seguridad en gasolineras de noche</h3><p>Mantente seguro al repostar de noche: hábitos sencillos que marcan una diferencia real.</p><a href="guides/seguridad-gasolinera-noche.html">Leer la guía &rarr;</a></div>
+</div></section>
+<section id="faq">
+<h2>Preguntas frecuentes</h2>
+<div class="faq-item"><h3>¿Por qué varían tanto los precios entre gasolineras?</h3><p>Los impuestos, el alquiler, el coste mayorista y la competencia influyen. Las gasolineras junto a las autopistas y en zonas caras suelen cobrar más, mientras que las que tienen mucha competencia local tienden a bajar el precio. Una gasolinera a pocos minutos puede ser 10 o 20 céntimos más barata por litro.</p></div>
+<div class="faq-item"><h3>¿Merece la pena la gasolina premium?</h3><p>Solo si tu coche la necesita de verdad. La mayoría de los coches están diseñados para gasolina de 95 octanos, y usar la de 98 no aporta ningún beneficio. Consulta el manual: si dice «premium obligatorio», úsala; si dice «recomendada», la normal suele ser suficiente.</p></div>
+<div class="faq-item"><h3>¿Qué tan precisas son estas calculadoras?</h3><p>Tan precisas como los datos que introduces. Usa tu consumo real medio (del ordenador de a bordo o de un registro de repostajes) y el precio actual del surtidor para obtener la mejor estimación. El consumo real varía con el tráfico, el clima, el aire acondicionado y tu forma de conducir.</p></div>
+<div class="faq-item"><h3>¿Este sitio rastrea mi ubicación o mis datos?</h3><p>No. Las calculadoras funcionan por completo en tu navegador y nada de lo que escribes se envía a ningún sitio. No pedimos tu ubicación: usa la aplicación de mapas o de precios que prefieras para encontrar gasolineras cerca de ti.</p></div>
+</section></main>
+<footer><div class="wrap">
+<h3>Sobre Gasolinera Cercana</h3>
+<p>Gasolinera Cercana es un recurso gratuito e independiente para conductores de España y Latinoamérica. Publicamos calculadoras de combustible y guías en español claro para ayudarte a gastar menos en cada repostaje. No estamos afiliados a ninguna marca de combustible, cadena de gasolineras ni petrolera, y no vendemos combustible ni recopilamos tus datos.</p>
+<h3>Aviso legal</h3>
+<p>Los precios mostrados en este sitio son estimaciones de referencia y cambian a diario según la zona. Comprueba siempre el precio indicado en el surtidor antes de repostar. Los resultados de las calculadoras son estimaciones basadas en los datos que introduces; tu consumo real depende de tu vehículo, tu forma de conducir, el tráfico y el clima.</p>
+<p>Guías: <a href="guides/gasolina-barata-cerca-de-ti.html">Cómo encontrar la gasolina más barata cerca de ti</a> &middot; <a href="guides/servicios-gasolinera.html">Servicios de la gasolinera explicados</a> &middot; <a href="guides/ahorrar-gasolina.html">10 formas de ahorrar gasolina</a> &middot; <a href="guides/diesel-vs-gasolina.html">Diésel vs gasolina: lo que debes saber</a> &middot; <a href="guides/carga-electrica-gasolineras.html">Carga eléctrica en gasolineras: qué esperar</a> &middot; <a href="guides/seguridad-gasolinera-noche.html">Consejos de seguridad en gasolineras de noche</a></p>
+<p>&copy; 2026 Gasolinera Cercana. Todos los precios son estimaciones. Conduce con cuidado.</p>
+</div></footer>
+<script>
+
+function fuelCost(km, cons, p){var l=km*cons/100; return {liters:l, cost:l*p};}
+function tripPlan(km, cons, p, tank){var l=km*cons/100; var stops=Math.max(0, Math.ceil(l/tank)-1); return {liters:l, cost:l*p, stops:stops};}
+function consTrack(km, l, p){var c=l/km*100; var cpk=p*c/100; return {cons:c, cpk:cpk};}
+function evVsGas(km, cons, gp, kwh100, ep){var gas=km*cons/100*gp; var ev=km*kwh100/100*ep; return {gas:gas, ev:ev, save:gas-ev};}
+function premVsReg(reg, prem, tank, fills){var extra=(prem-reg)*tank; return {perFill:extra, perMonth:extra*fills, perYear:extra*fills*12};}
+function $(id){return document.getElementById(id);}
+function show(id){$(id).classList.add('show');}
+function num(id){var v=parseFloat($(id).value); return isNaN(v)?0:v;}
+function money(x){return x.toFixed(2).replace('.', ',')+' €';}
+function run1(){var r=fuelCost(num('c1d'),num('c1m'),num('c1p')); $('r1').innerHTML='<div class="big">'+money(r.cost)+'</div><p>'+r.liters.toFixed(1)+' litros necesarios para este viaje.</p><p class="note">Con '+num('c1m').toFixed(1)+' L/100 km, cada 10 km extra cuestan unos '+money(10*num('c1m')/100*num('c1p'))+'.</p>'; show('r1');}
+function run2(){var r=tripPlan(num('c2d'),num('c2m'),num('c2p'),num('c2t')); $('r2').innerHTML='<div class="big">'+money(r.cost)+'</div><p>'+r.liters.toFixed(1)+' litros en total &middot; unas '+r.stops+' parada'+(r.stops==1?'':'s')+' para repostar con un depósito de '+num('c2t').toFixed(0)+' litros.</p>'; show('r2');}
+function run3(){var r=consTrack(num('c3mi'),num('c3g'),num('c3p')); $('r3').innerHTML='<div class="big">'+r.cons.toFixed(1)+' L/100 km</div><p>Coste por kilómetro: '+money(r.cpk)+' &middot; coste por 100 km: '+money(r.cpk*100)+'.</p>'; show('r3');}
+function run4(){var r=evVsGas(num('c4mi'),num('c4m'),num('c4g'),num('c4e'),num('c4p')); var w=r.save>=0?'Ahorrarías unos <b>'+money(r.save)+'</b> al mes con el eléctrico.':'El coche de gasolina saldría unos <b>'+money(-r.save)+'</b> al mes más barato en combustible.'; $('r4').innerHTML='<div class="big">'+money(r.ev)+' / mes (eléctrico) frente a '+money(r.gas)+' / mes (gasolina)</div><p>'+w+'</p><p class="note">Coste del eléctrico: '+money(r.ev/num('c4mi')*100)+' por 100 km. Coste de gasolina: '+money(r.gas/num('c4mi')*100)+' por 100 km.</p>'; show('r4');}
+function run5(){var r=premVsReg(num('c5r'),num('c5p'),num('c5t'),num('c5f')); $('r5').innerHTML='<div class="big">'+money(r.perYear)+' / año de más</div><p>La premium cuesta '+money(r.perFill)+' más por repostaje y unos '+money(r.perMonth)+' más al mes.</p><p class="note">A menos que tu coche exija gasolina de 98 octanos, ese dinero no te da nada: la gasolina de 95 es suficiente para la mayoría de los coches.</p>'; show('r5');}
+
+</script>
+</body>
+</html>
